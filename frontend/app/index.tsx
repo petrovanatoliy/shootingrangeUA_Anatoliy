@@ -25,7 +25,15 @@ export default function WelcomeScreen() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    checkAuth();
+    const timeout = setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+
+    checkAuth().finally(() => {
+      clearTimeout(timeout);
+    });
+
+    return () => clearTimeout(timeout);
   }, []);
 
   const checkAuth = async () => {
@@ -35,14 +43,15 @@ export default function WelcomeScreen() {
       
       if (adminMode === 'true') {
         router.replace('/admin/dashboard');
+        return;
       } else if (userId) {
         router.replace('/user/home');
+        return;
       }
     } catch (error) {
       console.error('Auth check error:', error);
-    } finally {
-      setLoading(false);
     }
+    setLoading(false);
   };
 
   if (loading) {
