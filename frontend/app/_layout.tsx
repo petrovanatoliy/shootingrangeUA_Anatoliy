@@ -8,7 +8,7 @@ export default function RootLayout() {
   return (
     <SafeAreaProvider initialMetrics={initialWindowMetrics}>
       <View style={{ flex: 1, backgroundColor: '#202447' }}>
-        <StatusBar style="light" backgroundColor="#202447" />
+        <StatusBar style="light" />
         <Stack
           screenOptions={{
             headerShown: false,
