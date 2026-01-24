@@ -69,14 +69,6 @@ export default function WelcomeScreen() {
     }
   };
 
-  if (loading) {
-    return (
-      <View style={styles.loadingContainer}>
-        <ActivityIndicator size="large" color={COLORS.accent} />
-      </View>
-    );
-  }
-
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.content}>
@@ -88,28 +80,22 @@ export default function WelcomeScreen() {
 
         <View style={styles.buttonsContainer}>
           <TouchableOpacity
-            style={styles.qrButton}
-            onPress={() => router.push('/qr-code')}
-          >
-            <Ionicons name="qr-code" size={24} color={COLORS.accent} />
-            <Text style={styles.qrButtonText}>QR для Expo Go</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
             style={styles.userButton}
             onPress={() => router.push('/user/login')}
           >
-            <Ionicons name="person" size={24} color={COLORS.white} />
-            <Text style={styles.buttonText}>Увійти як клієнт</Text>
+            <Ionicons name="call" size={24} color={COLORS.white} />
+            <Text style={styles.buttonText}>За номером телефону</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity
-            style={styles.adminButton}
-            onPress={() => router.push('/admin/login')}
-          >
-            <Ionicons name="shield-checkmark" size={20} color={COLORS.light} />
-            <Text style={styles.adminButtonText}>Адміністратор</Text>
-          </TouchableOpacity>
+          {showAdminButton && (
+            <TouchableOpacity
+              style={styles.adminButton}
+              onPress={() => router.push('/admin/login')}
+            >
+              <Ionicons name="shield-checkmark" size={20} color={COLORS.light} />
+              <Text style={styles.adminButtonText}>Адміністратор</Text>
+            </TouchableOpacity>
+          )}
         </View>
       </View>
     </SafeAreaView>
