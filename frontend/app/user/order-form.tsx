@@ -71,16 +71,23 @@ export default function OrderFormScreen() {
     try {
       const orderData = {
         user_id: user.id,
-        items: items.map((item) => ({
-          type: item.type,
-          item_id: item.id,
-          name: item.name,
-          quantity: item.quantity,
-          price: item.price,
-          discount_percent: item.discountPercent,
-        })),
+        items: items.map((item) => {
+          const itemPrice = item.price - (item.price * item.discount_percent) / 100;
+          return {
+            type: item.type,
+            item_id: item.item_id,
+            name: item.name,
+            base_price: item.price,
+            item_discount_percent: item.discount_percent,
+            quantity: item.quantity,
+            duration: item.duration,
+            master_name: item.master_name,
+            date_time: item.date_time,
+            total_amount: itemPrice * item.quantity,
+          };
+        }),
         total_amount: getTotal(),
-        status: 'pending',
+        discount_percent: user.discount_percent,
       };
 
       const response = await axios.post(`${API_URL}/api/orders`, orderData);
