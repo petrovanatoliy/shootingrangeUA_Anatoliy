@@ -72,11 +72,11 @@ export default function ProductDetailScreen() {
     if (!product) return;
     
     addItem({
-      id: `product-${product.id}-${Date.now()}`,
       type: 'product',
+      item_id: product.id,
       name: product.name,
       price: product.price_uah,
-      discountPercent: product.discount_percent,
+      discount_percent: product.discount_percent,
       quantity: quantity,
       image: product.main_image,
     });
