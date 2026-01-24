@@ -68,6 +68,14 @@ export default function WelcomeScreen() {
 
         <View style={styles.buttonsContainer}>
           <TouchableOpacity
+            style={styles.qrButton}
+            onPress={() => router.push('/qr-code')}
+          >
+            <Ionicons name="qr-code" size={24} color={COLORS.accent} />
+            <Text style={styles.qrButtonText}>QR для Expo Go</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
             style={styles.userButton}
             onPress={() => router.push('/user/login')}
           >
