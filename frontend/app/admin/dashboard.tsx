@@ -66,7 +66,7 @@ export default function DashboardScreen() {
         axios.get(`${API_URL}/api/products`),
         axios.get(`${API_URL}/api/services`),
         axios.get(`${API_URL}/api/masters`),
-        axios.get(`${API_URL}/api/orders`),
+        axios.get(`${API_URL}/api/admin/orders`),
         axios.get(`${API_URL}/api/users`),
       ]);
 
