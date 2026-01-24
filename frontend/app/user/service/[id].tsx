@@ -99,14 +99,14 @@ export default function ServiceDetailScreen() {
     }
 
     addItem({
-      id: `service-${service.id}-${Date.now()}`,
       type: 'service',
+      item_id: service.id,
       name: service.name,
       price: calculatePrice(),
-      discountPercent: 0,
+      discount_percent: 0,
       quantity: 1,
       duration: service.has_duration_selection ? selectedDuration : undefined,
-      masterName: selectedMaster?.full_name,
+      master_name: selectedMaster?.full_name,
     });
 
     Alert.alert(
