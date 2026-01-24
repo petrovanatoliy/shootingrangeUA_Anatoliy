@@ -334,3 +334,5 @@ test_plan:
 agent_communication:
   - agent: "main"
     message: "Admin app MVP completed with all major features: catalogs, products, services, masters, orders, loyalty rules, and Telegram settings. All screens verified with screenshots."
+  - agent: "main"
+    message: "Added QR Code screen for Expo Go testing. Users can now test the mobile app on real devices by scanning QR code from the web preview. Navigation button added to home screen."
