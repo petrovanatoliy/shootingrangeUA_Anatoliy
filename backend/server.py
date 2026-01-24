@@ -214,11 +214,17 @@ class Settings(BaseModel):
     telegram_bot_token: str = ""
     telegram_chat_id: str = ""
     default_language: str = "uk"
+    admin_phone1: str = ""
+    admin_phone2: str = ""
+    admin_phone3: str = ""
 
 class SettingsUpdate(BaseModel):
     telegram_bot_token: Optional[str] = None
     telegram_chat_id: Optional[str] = None
     default_language: Optional[str] = None
+    admin_phone1: Optional[str] = None
+    admin_phone2: Optional[str] = None
+    admin_phone3: Optional[str] = None
 
 # ===================== CATALOG ENDPOINTS =====================
 
