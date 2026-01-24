@@ -33,6 +33,9 @@ interface Settings {
   telegram_bot_token: string;
   telegram_chat_id: string;
   default_language: string;
+  admin_phone1: string;
+  admin_phone2: string;
+  admin_phone3: string;
 }
 
 export default function SettingsScreen() {
@@ -41,6 +44,9 @@ export default function SettingsScreen() {
     telegram_bot_token: '',
     telegram_chat_id: '',
     default_language: 'uk',
+    admin_phone1: '',
+    admin_phone2: '',
+    admin_phone3: '',
   });
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
