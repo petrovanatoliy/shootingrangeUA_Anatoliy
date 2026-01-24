@@ -49,6 +49,7 @@ interface Order {
 
 export default function ProfileScreen() {
   const router = useRouter();
+  const { setUserId } = useCartStore();
   const [user, setUser] = useState<User | null>(null);
   const [orders, setOrders] = useState<Order[]>([]);
   const [loading, setLoading] = useState(true);
