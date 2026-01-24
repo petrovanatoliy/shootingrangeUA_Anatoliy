@@ -167,6 +167,32 @@ class User(UserBase):
     discount_percent: float = 0
     qr_md5: str = ""
 
+# Cart Models
+class CartItemBase(BaseModel):
+    type: str  # product or service
+    item_id: str
+    name: str
+    price: float
+    discount_percent: float = 0
+    quantity: int = 1
+    image: Optional[str] = None
+    # Service specific
+    duration: Optional[int] = None
+    master_name: Optional[str] = None
+    date_time: Optional[str] = None
+
+class CartItemCreate(CartItemBase):
+    pass
+
+class CartItem(CartItemBase):
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+
+class Cart(BaseModel):
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    user_id: str
+    items: List[CartItem] = []
+    updated_at: datetime = Field(default_factory=datetime.utcnow)
+
 # Order Models
 class OrderItemBase(BaseModel):
     type: str  # product or service
