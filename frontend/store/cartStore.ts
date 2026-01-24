@@ -37,8 +37,8 @@ export const useCartStore = create<CartState>()(
           (i) => i.id === item.id && i.type === item.type
         );
 
-        if (existingIndex >= 0 && item.type === 'product') {
-          // Update quantity for products
+        if (existingIndex >= 0) {
+          // Update quantity for existing items (both products and services)
           const newItems = [...items];
           newItems[existingIndex].quantity += item.quantity;
           set({ items: newItems });
