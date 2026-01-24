@@ -652,6 +652,12 @@ async def get_orders(user_id: str):
     orders = await db.orders.find({"user_id": user_id}).sort("created_at", -1).to_list(1000)
     return [Order(**o) for o in orders]
 
+@api_router.get("/admin/orders", response_model=List[Order])
+async def get_all_orders():
+    """Get all orders - admin only endpoint"""
+    orders = await db.orders.find().sort("created_at", -1).to_list(1000)
+    return [Order(**o) for o in orders]
+
 @api_router.get("/orders/{order_id}", response_model=Order)
 async def get_order(order_id: str):
     order = await db.orders.find_one({"id": order_id})
