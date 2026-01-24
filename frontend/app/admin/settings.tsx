@@ -200,6 +200,62 @@ export default function SettingsScreen() {
 
           <View style={styles.section}>
             <View style={styles.sectionHeader}>
+              <Ionicons name="shield-checkmark" size={24} color={COLORS.accent} />
+              <Text style={styles.sectionTitle}>Телефони адміністраторів</Text>
+            </View>
+
+            <View style={styles.infoCard}>
+              <Text style={styles.infoText}>
+                Користувачі з цими номерами матимуть доступ до адмін-панелі.
+                Якщо заповнено хоча б один номер, кнопка "Адміністратор" буде прихована на головній сторінці.
+              </Text>
+            </View>
+
+            <View style={styles.inputGroup}>
+              <Text style={styles.label}>Телефон адміністратора 1</Text>
+              <TextInput
+                style={styles.input}
+                value={settings.admin_phone1}
+                onChangeText={(text) =>
+                  setSettings({ ...settings, admin_phone1: text })
+                }
+                placeholder="+380661234567"
+                placeholderTextColor={COLORS.accent}
+                keyboardType="phone-pad"
+              />
+            </View>
+
+            <View style={styles.inputGroup}>
+              <Text style={styles.label}>Телефон адміністратора 2</Text>
+              <TextInput
+                style={styles.input}
+                value={settings.admin_phone2}
+                onChangeText={(text) =>
+                  setSettings({ ...settings, admin_phone2: text })
+                }
+                placeholder="+380661234567"
+                placeholderTextColor={COLORS.accent}
+                keyboardType="phone-pad"
+              />
+            </View>
+
+            <View style={styles.inputGroup}>
+              <Text style={styles.label}>Телефон адміністратора 3</Text>
+              <TextInput
+                style={styles.input}
+                value={settings.admin_phone3}
+                onChangeText={(text) =>
+                  setSettings({ ...settings, admin_phone3: text })
+                }
+                placeholder="+380661234567"
+                placeholderTextColor={COLORS.accent}
+                keyboardType="phone-pad"
+              />
+            </View>
+          </View>
+
+          <View style={styles.section}>
+            <View style={styles.sectionHeader}>
               <Ionicons name="language" size={24} color={COLORS.accent} />
               <Text style={styles.sectionTitle}>Мова</Text>
             </View>
