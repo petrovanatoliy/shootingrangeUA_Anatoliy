@@ -51,14 +51,27 @@ interface User {
 
 export default function HomeScreen() {
   const router = useRouter();
+  const { setUserId } = useCartStore();
   const [user, setUser] = useState<User | null>(null);
   const [catalogs, setCatalogs] = useState<Catalog[]>([]);
   const [featuredProducts, setFeaturedProducts] = useState<Product[]>([]);
   const [refreshing, setRefreshing] = useState(false);
 
   useEffect(() => {
+    initializeUser();
     loadData();
   }, []);
+
+  const initializeUser = async () => {
+    try {
+      const userId = await AsyncStorage.getItem('user_id');
+      if (userId) {
+        setUserId(userId);
+      }
+    } catch (error) {
+      console.error('Failed to initialize user:', error);
+    }
+  };
 
   const loadData = async () => {
     try {
