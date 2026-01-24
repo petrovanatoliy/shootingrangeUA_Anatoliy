@@ -36,7 +36,7 @@ export default function CartScreen() {
       Alert.alert('Кошик порожній', 'Додайте товари або послуги');
       return;
     }
-    router.push('/user/checkout' as any);
+    router.push('/user/order-form' as any);
   };
 
   const handleClearCart = () => {
