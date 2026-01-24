@@ -10,6 +10,10 @@ import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from 'axios';
+import Constants from 'expo-constants';
+
+const API_URL = Constants.expoConfig?.extra?.apiUrl || process.env.EXPO_PUBLIC_BACKEND_URL || 'https://shooting-range-ua.preview.emergentagent.com';
 
 const COLORS = {
   primary: '#202447',
@@ -22,13 +26,15 @@ const COLORS = {
 
 export default function WelcomeScreen() {
   const router = useRouter();
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [checked, setChecked] = useState(false);
+  const [showAdminButton, setShowAdminButton] = useState(false);
 
   useEffect(() => {
     if (!checked) {
       setChecked(true);
       checkAuth();
+      checkAdminPhones();
     }
   }, [checked]);
 
@@ -46,6 +52,20 @@ export default function WelcomeScreen() {
       }
     } catch (error) {
       console.error('Auth check error:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const checkAdminPhones = async () => {
+    try {
+      const response = await axios.get(`${API_URL}/api/settings/has-admin-phones`);
+      // Показувати кнопку тільки якщо немає налаштованих admin phones
+      setShowAdminButton(!response.data.has_admin_phones);
+    } catch (error) {
+      console.error('Error checking admin phones:', error);
+      // За замовчуванням показуємо кнопку
+      setShowAdminButton(true);
     }
   };
 
