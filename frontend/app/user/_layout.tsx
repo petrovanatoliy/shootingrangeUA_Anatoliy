@@ -69,6 +69,12 @@ export default function UserLayout() {
         }}
       />
       <Tabs.Screen
+        name="order-form"
+        options={{
+          href: null, // Hide from tab bar
+        }}
+      />
+      <Tabs.Screen
         name="login"
         options={{
           href: null,
