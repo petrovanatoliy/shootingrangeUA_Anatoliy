@@ -1,19 +1,41 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, ScrollView, ActivityIndicator } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, ActivityIndicator, TouchableOpacity, Linking } from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
 import Constants from 'expo-constants';
+import { Ionicons } from '@expo/vector-icons';
+import { useRouter } from 'expo-router';
 
 export default function QRCodeScreen() {
+  const router = useRouter();
   const [expoUrl, setExpoUrl] = useState<string>('');
+  const [tunnelUrl, setTunnelUrl] = useState<string>('');
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Get the Expo URL from environment
-    const hostname = Constants.expoConfig?.hostUri || 'localhost:3000';
-    const url = `exp://${hostname}`;
-    setExpoUrl(url);
-    setLoading(false);
+    fetchTunnelUrl();
   }, []);
+
+  const fetchTunnelUrl = async () => {
+    try {
+      // Try to get the tunnel URL from the Expo preview URL
+      const previewUrl = process.env.EXPO_PUBLIC_BACKEND_URL || 'https://shooting-range-ua.preview.emergentagent.com';
+      
+      // Extract the subdomain to create the tunnel URL
+      const subdomain = previewUrl.match(/https:\/\/([^.]+)/)?.[1] || 'shooting-range-ua';
+      const tunnel = `${subdomain}.tunnel.emergentagent.com`;
+      
+      const url = `exp://${tunnel}`;
+      setExpoUrl(url);
+      setTunnelUrl(tunnel);
+    } catch (error) {
+      console.error('Error getting tunnel URL:', error);
+      // Fallback to a basic URL
+      const hostname = Constants.expoConfig?.hostUri || 'localhost:3000';
+      setExpoUrl(`exp://${hostname}`);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
