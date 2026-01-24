@@ -587,6 +587,39 @@ async def update_settings(settings_update: SettingsUpdate):
     settings = await db.settings.find_one({})
     return Settings(**settings)
 
+@api_router.get("/settings/has-admin-phones")
+async def check_admin_phones():
+    """Check if any admin phone numbers are configured"""
+    settings = await db.settings.find_one({})
+    if not settings:
+        return {"has_admin_phones": False}
+    
+    has_phones = bool(
+        settings.get("admin_phone1") or 
+        settings.get("admin_phone2") or 
+        settings.get("admin_phone3")
+    )
+    return {"has_admin_phones": has_phones}
+
+@api_router.post("/users/check-admin")
+async def check_if_admin(phone: str):
+    """Check if phone number belongs to an admin"""
+    settings = await db.settings.find_one({})
+    if not settings:
+        return {"is_admin": False}
+    
+    admin_phones = [
+        settings.get("admin_phone1", ""),
+        settings.get("admin_phone2", ""),
+        settings.get("admin_phone3", "")
+    ]
+    
+    # Remove empty strings and check if phone matches
+    admin_phones = [p for p in admin_phones if p]
+    is_admin = phone in admin_phones
+    
+    return {"is_admin": is_admin}
+
 # ===================== TELEGRAM NOTIFICATION =====================
 
 async def send_telegram_notification(order: Order, user: User):
