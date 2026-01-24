@@ -31,6 +31,7 @@ const COLORS = {
 
 export default function UserLoginScreen() {
   const router = useRouter();
+  const [countryCode, setCountryCode] = useState('+38');
   const [phone, setPhone] = useState('');
   const [fullName, setFullName] = useState('');
   const [loading, setLoading] = useState(false);
@@ -49,6 +50,18 @@ export default function UserLoginScreen() {
     setPhone(cleaned.slice(0, 10));
   };
 
+  const handleCountryCodeChange = (text: string) => {
+    // Allow + and numbers
+    const cleaned = text.replace(/[^\d+]/g, '');
+    if (cleaned.startsWith('+')) {
+      setCountryCode(cleaned);
+    } else if (cleaned) {
+      setCountryCode('+' + cleaned);
+    } else {
+      setCountryCode('+');
+    }
+  };
+
   const checkPhone = async () => {
     if (phone.length < 10) {
       Alert.alert('Помилка', 'Введіть коректний номер телефону');
@@ -57,7 +70,22 @@ export default function UserLoginScreen() {
 
     setLoading(true);
     try {
-      const response = await axios.get(`${API_URL}/api/users/phone/+380${phone}`);
+      const fullPhone = `${countryCode}${phone}`;
+      
+      // Check if this is an admin phone
+      const adminCheckResponse = await axios.post(`${API_URL}/api/users/check-admin`, null, {
+        params: { phone: fullPhone }
+      });
+      
+      if (adminCheckResponse.data.is_admin) {
+        // This is an admin phone, redirect to admin dashboard
+        await AsyncStorage.setItem('admin_mode', 'true');
+        router.replace('/admin/dashboard');
+        return;
+      }
+
+      // Check if user exists
+      const response = await axios.get(`${API_URL}/api/users/phone/${fullPhone}`);
       // User exists, log them in
       await AsyncStorage.setItem('user_id', response.data.id);
       await AsyncStorage.setItem('user_data', JSON.stringify(response.data));
@@ -82,8 +110,9 @@ export default function UserLoginScreen() {
 
     setLoading(true);
     try {
+      const fullPhone = `${countryCode}${phone}`;
       const response = await axios.post(`${API_URL}/api/users/login`, {
-        phone: `+380${phone}`,
+        phone: fullPhone,
         full_name: fullName.trim(),
       });
 
