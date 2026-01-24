@@ -160,14 +160,19 @@ export default function UserLoginScreen() {
             </Text>
 
             <View style={styles.phoneInputContainer}>
-              <View style={styles.countryCode}>
-                <Text style={styles.countryCodeText}>+380</Text>
-              </View>
+              <TextInput
+                style={styles.countryCodeInput}
+                value={countryCode}
+                onChangeText={handleCountryCodeChange}
+                keyboardType="phone-pad"
+                maxLength={5}
+                editable={!isNewUser}
+              />
               <TextInput
                 style={styles.phoneInput}
                 value={formatPhone(phone)}
                 onChangeText={handlePhoneChange}
-                placeholder="XX XXX XX XX"
+                placeholder="XXX XXX XX XX"
                 placeholderTextColor={COLORS.accent}
                 keyboardType="phone-pad"
                 maxLength={13}
