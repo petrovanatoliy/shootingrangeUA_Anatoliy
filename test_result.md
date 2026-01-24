@@ -318,6 +318,18 @@ frontend:
         agent: "main"
         comment: "Telegram settings with test message button - screenshot verified"
 
+  - task: "QR Code Screen"
+    implemented: true
+    working: true
+    file: "app/qr-code.tsx"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "main"
+        comment: "QR code generation for Expo Go testing - allows users to test app on real mobile devices"
+
 metadata:
   created_by: "main_agent"
   version: "1.0"
