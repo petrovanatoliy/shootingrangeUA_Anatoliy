@@ -36,6 +36,8 @@ interface Settings {
   admin_phone1: string;
   admin_phone2: string;
   admin_phone3: string;
+  server_address: string;
+  access_code: string;
 }
 
 export default function SettingsScreen() {
@@ -47,8 +49,11 @@ export default function SettingsScreen() {
     admin_phone1: '',
     admin_phone2: '',
     admin_phone3: '',
+    server_address: '',
+    access_code: '',
   });
   const [loading, setLoading] = useState(true);
+  const [testing, setTesting] = useState(false);
   const [saving, setSaving] = useState(false);
   const [showToken, setShowToken] = useState(false);
 
