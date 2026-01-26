@@ -257,12 +257,13 @@ export default function OrderFormScreen() {
           {submitting ? (
             <ActivityIndicator color={COLORS.white} />
           ) : (
-            <>
-              <Ionicons name="checkmark-circle" size={24} color={COLORS.white} />
-              <Text style={styles.submitButtonText}>
-                Підтвердити замовлення ({total.toFixed(2)} ₴)
-              </Text>
-            </>
+            <View style={styles.submitButtonContent}>
+              <View style={styles.submitButtonRow}>
+                <Ionicons name="checkmark-circle" size={24} color={COLORS.white} />
+                <Text style={styles.submitButtonText}>Підтвердити замовлення</Text>
+              </View>
+              <Text style={styles.submitButtonAmount}>{total.toFixed(2)} ₴</Text>
+            </View>
           )}
         </TouchableOpacity>
       </View>
