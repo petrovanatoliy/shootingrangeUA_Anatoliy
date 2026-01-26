@@ -243,6 +243,8 @@ class Settings(BaseModel):
     admin_phone1: str = ""
     admin_phone2: str = ""
     admin_phone3: str = ""
+    server_address: str = ""
+    access_code: str = ""
 
 class SettingsUpdate(BaseModel):
     telegram_bot_token: Optional[str] = None
@@ -251,6 +253,8 @@ class SettingsUpdate(BaseModel):
     admin_phone1: Optional[str] = None
     admin_phone2: Optional[str] = None
     admin_phone3: Optional[str] = None
+    server_address: Optional[str] = None
+    access_code: Optional[str] = None
 
 # ===================== CATALOG ENDPOINTS =====================
 
