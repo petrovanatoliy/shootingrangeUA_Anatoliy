@@ -509,6 +509,9 @@ const styles = StyleSheet.create({
     color: COLORS.white,
     fontWeight: '600',
   },
+  testButtonDisabled: {
+    opacity: 0.6,
+  },
   languageOptions: {
     gap: 8,
   },
