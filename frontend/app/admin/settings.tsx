@@ -105,6 +105,33 @@ export default function SettingsScreen() {
     }
   };
 
+  const testConnection = async () => {
+    if (!settings.server_address) {
+      Alert.alert('Помилка', 'Введіть адресу сервера');
+      return;
+    }
+
+    setTesting(true);
+    try {
+      const response = await axios.post(`${API_URL}/api/settings/test-connection`, null, {
+        params: {
+          server_address: settings.server_address,
+          access_code: settings.access_code,
+        },
+      });
+
+      if (response.data.success) {
+        Alert.alert('Успіх! ✅', response.data.message);
+      } else {
+        Alert.alert('Помилка', response.data.message);
+      }
+    } catch (error) {
+      Alert.alert('Помилка', 'Не вдалося підключитися до сервера');
+    } finally {
+      setTesting(false);
+    }
+  };
+
   if (loading) {
     return (
       <View style={styles.loadingContainer}>
