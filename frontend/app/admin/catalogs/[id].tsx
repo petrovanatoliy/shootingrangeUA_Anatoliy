@@ -98,6 +98,7 @@ export default function CatalogEditScreen() {
         name: name.trim(),
         image,
         is_visible: isVisible,
+        is_product: isProduct,
       };
 
       if (isNew) {
