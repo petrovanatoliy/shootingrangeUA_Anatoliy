@@ -41,7 +41,13 @@ export default function CatalogsScreen() {
 
   const loadCatalogs = async () => {
     try {
-      const response = await axios.get(`${API_URL}/api/catalogs?visible_only=true`);
+      // Завантажити тільки каталоги товарів (is_product=true)
+      const response = await axios.get(`${API_URL}/api/catalogs`, {
+        params: {
+          visible_only: true,
+          is_product: true,
+        },
+      });
       setCatalogs(response.data);
     } catch (error) {
       console.error('Failed to load catalogs:', error);
