@@ -551,6 +551,35 @@ const styles = StyleSheet.create({
     color: COLORS.white,
     fontSize: 16,
   },
+  appInfoSection: {
+    marginTop: 40,
+    marginBottom: 20,
+  },
+  appInfoDivider: {
+    height: 1,
+    backgroundColor: 'rgba(255,255,255,0.1)',
+    marginBottom: 20,
+  },
+  appInfoContent: {
+    alignItems: 'center',
+    gap: 8,
+  },
+  versionText: {
+    color: COLORS.light,
+    fontSize: 14,
+    marginBottom: 12,
+  },
+  developmentText: {
+    color: COLORS.accent,
+    fontSize: 13,
+    fontWeight: '500',
+  },
+  websiteText: {
+    color: COLORS.success,
+    fontSize: 14,
+    fontWeight: '600',
+    textDecorationLine: 'underline',
+  },
   bottomPadding: {
     height: 40,
   },
