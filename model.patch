@@ -1,68 +1,167 @@
-diff --git a/frontend/app/user/home.tsx b/frontend/app/user/home.tsx
-index 6c525b6..cd89f7d 100644
---- a/frontend/app/user/home.tsx
-+++ b/frontend/app/user/home.tsx
-@@ -332,6 +332,28 @@ const styles = StyleSheet.create({
-     color: COLORS.light,
-     fontSize: 12,
+diff --git a/frontend/app/admin/catalogs/[id].tsx b/frontend/app/admin/catalogs/[id].tsx
+index 472e562..85d16a1 100644
+--- a/frontend/app/admin/catalogs/[id].tsx
++++ b/frontend/app/admin/catalogs/[id].tsx
+@@ -201,6 +201,55 @@ export default function CatalogEditScreen() {
+               ]}
+             />
+           </TouchableOpacity>
++
++          <View style={styles.typeSelector}>
++            <Text style={styles.label}>Тип каталогу</Text>
++            <View style={styles.typeButtons}>
++              <TouchableOpacity
++                style={[
++                  styles.typeButton,
++                  isProduct && styles.typeButtonActive,
++                ]}
++                onPress={() => setIsProduct(true)}
++              >
++                <Ionicons
++                  name="cube"
++                  size={24}
++                  color={isProduct ? COLORS.white : COLORS.accent}
++                />
++                <Text
++                  style={[
++                    styles.typeButtonText,
++                    isProduct && styles.typeButtonTextActive,
++                  ]}
++                >
++                  Товар
++                </Text>
++              </TouchableOpacity>
++
++              <TouchableOpacity
++                style={[
++                  styles.typeButton,
++                  !isProduct && styles.typeButtonActive,
++                ]}
++                onPress={() => setIsProduct(false)}
++              >
++                <Ionicons
++                  name="briefcase"
++                  size={24}
++                  color={!isProduct ? COLORS.white : COLORS.accent}
++                />
++                <Text
++                  style={[
++                    styles.typeButtonText,
++                    !isProduct && styles.typeButtonTextActive,
++                  ]}
++                >
++                  Послуга
++                </Text>
++              </TouchableOpacity>
++            </View>
++          </View>
+         </ScrollView>
+       </KeyboardAvoidingView>
+     </SafeAreaView>
+@@ -328,4 +377,33 @@ const styles = StyleSheet.create({
+   visibilityOff: {
+     backgroundColor: COLORS.warm,
    },
-+  categoryTypeSelector: {
++  typeSelector: {
++    marginTop: 20,
++  },
++  typeButtons: {
 +    flexDirection: 'row',
-+    paddingHorizontal: 16,
-+    paddingVertical: 20,
 +    gap: 12,
 +  },
 +  typeButton: {
 +    flex: 1,
-+    backgroundColor: COLORS.secondary,
-+    borderRadius: 16,
++    backgroundColor: 'rgba(255,255,255,0.05)',
++    borderRadius: 12,
 +    padding: 16,
 +    alignItems: 'center',
 +    gap: 8,
-+    borderWidth: 1,
-+    borderColor: 'rgba(255,255,255,0.1)',
++    borderWidth: 2,
++    borderColor: 'transparent',
++  },
++  typeButtonActive: {
++    backgroundColor: COLORS.accent,
++    borderColor: COLORS.light,
 +  },
 +  typeButtonText: {
-+    color: COLORS.white,
++    color: COLORS.accent,
 +    fontSize: 14,
 +    fontWeight: '600',
-+    textAlign: 'center',
 +  },
-   section: {
-     marginBottom: 24,
-   },
++  typeButtonTextActive: {
++    color: COLORS.white,
++  },
+ });
 diff --git a/model.patch b/model.patch
-index a0d17d3..e69de29 100644
+index 377bc24..e69de29 100644
 --- a/model.patch
 +++ b/model.patch
-@@ -1,30 +0,0 @@
+@@ -1,68 +0,0 @@
+-diff --git a/frontend/app/user/home.tsx b/frontend/app/user/home.tsx
+-index 6c525b6..cd89f7d 100644
+---- a/frontend/app/user/home.tsx
+-+++ b/frontend/app/user/home.tsx
+-@@ -332,6 +332,28 @@ const styles = StyleSheet.create({
+-     color: COLORS.light,
+-     fontSize: 12,
+-   },
+-+  categoryTypeSelector: {
+-+    flexDirection: 'row',
+-+    paddingHorizontal: 16,
+-+    paddingVertical: 20,
+-+    gap: 12,
+-+  },
+-+  typeButton: {
+-+    flex: 1,
+-+    backgroundColor: COLORS.secondary,
+-+    borderRadius: 16,
+-+    padding: 16,
+-+    alignItems: 'center',
+-+    gap: 8,
+-+    borderWidth: 1,
+-+    borderColor: 'rgba(255,255,255,0.1)',
+-+  },
+-+  typeButtonText: {
+-+    color: COLORS.white,
+-+    fontSize: 14,
+-+    fontWeight: '600',
+-+    textAlign: 'center',
+-+  },
+-   section: {
+-     marginBottom: 24,
+-   },
 -diff --git a/model.patch b/model.patch
--index ca86052..e69de29 100644
+-index a0d17d3..e69de29 100644
 ---- a/model.patch
 -+++ b/model.patch
--@@ -1,25 +0,0 @@
---diff --git a/frontend/app/admin/settings.tsx b/frontend/app/admin/settings.tsx
---index 43467cb..e1e86d0 100644
------ a/frontend/app/admin/settings.tsx
---+++ b/frontend/app/admin/settings.tsx
---@@ -36,6 +36,8 @@ interface Settings {
---   admin_phone1: string;
---   admin_phone2: string;
---   admin_phone3: string;
---+  server_address: string;
---+  access_code: string;
--- }
--- 
--- export default function SettingsScreen() {
---@@ -47,8 +49,11 @@ export default function SettingsScreen() {
---     admin_phone1: '',
---     admin_phone2: '',
---     admin_phone3: '',
---+    server_address: '',
---+    access_code: '',
---   });
---   const [loading, setLoading] = useState(true);
---+  const [testing, setTesting] = useState(false);
---   const [saving, setSaving] = useState(false);
---   const [showToken, setShowToken] = useState(false);
--- 
+-@@ -1,30 +0,0 @@
+--diff --git a/model.patch b/model.patch
+--index ca86052..e69de29 100644
+----- a/model.patch
+--+++ b/model.patch
+--@@ -1,25 +0,0 @@
+---diff --git a/frontend/app/admin/settings.tsx b/frontend/app/admin/settings.tsx
+---index 43467cb..e1e86d0 100644
+------ a/frontend/app/admin/settings.tsx
+---+++ b/frontend/app/admin/settings.tsx
+---@@ -36,6 +36,8 @@ interface Settings {
+---   admin_phone1: string;
+---   admin_phone2: string;
+---   admin_phone3: string;
+---+  server_address: string;
+---+  access_code: string;
+--- }
+--- 
+--- export default function SettingsScreen() {
+---@@ -47,8 +49,11 @@ export default function SettingsScreen() {
+---     admin_phone1: '',
+---     admin_phone2: '',
+---     admin_phone3: '',
+---+    server_address: '',
+---+    access_code: '',
+---   });
+---   const [loading, setLoading] = useState(true);
+---+  const [testing, setTesting] = useState(false);
+---   const [saving, setSaving] = useState(false);
+---   const [showToken, setShowToken] = useState(false);
+--- 
