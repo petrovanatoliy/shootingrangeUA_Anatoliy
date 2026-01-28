@@ -39,6 +39,7 @@ export default function CatalogEditScreen() {
   const [name, setName] = useState('');
   const [image, setImage] = useState<string | null>(null);
   const [isVisible, setIsVisible] = useState(true);
+  const [isProduct, setIsProduct] = useState(true);
   const [loading, setLoading] = useState(false);
   const [saving, setSaving] = useState(false);
 
@@ -56,6 +57,7 @@ export default function CatalogEditScreen() {
       setName(catalog.name);
       setImage(catalog.image);
       setIsVisible(catalog.is_visible);
+      setIsProduct(catalog.is_product ?? true);
     } catch (error) {
       Alert.alert('Помилка', 'Не вдалося завантажити каталог');
       router.back();
