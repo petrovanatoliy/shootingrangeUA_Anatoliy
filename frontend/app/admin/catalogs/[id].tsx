@@ -377,4 +377,33 @@ const styles = StyleSheet.create({
   visibilityOff: {
     backgroundColor: COLORS.warm,
   },
+  typeSelector: {
+    marginTop: 20,
+  },
+  typeButtons: {
+    flexDirection: 'row',
+    gap: 12,
+  },
+  typeButton: {
+    flex: 1,
+    backgroundColor: 'rgba(255,255,255,0.05)',
+    borderRadius: 12,
+    padding: 16,
+    alignItems: 'center',
+    gap: 8,
+    borderWidth: 2,
+    borderColor: 'transparent',
+  },
+  typeButtonActive: {
+    backgroundColor: COLORS.accent,
+    borderColor: COLORS.light,
+  },
+  typeButtonText: {
+    color: COLORS.accent,
+    fontSize: 14,
+    fontWeight: '600',
+  },
+  typeButtonTextActive: {
+    color: COLORS.white,
+  },
 });
