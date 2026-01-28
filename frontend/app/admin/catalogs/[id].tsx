@@ -201,6 +201,55 @@ export default function CatalogEditScreen() {
               ]}
             />
           </TouchableOpacity>
+
+          <View style={styles.typeSelector}>
+            <Text style={styles.label}>Тип каталогу</Text>
+            <View style={styles.typeButtons}>
+              <TouchableOpacity
+                style={[
+                  styles.typeButton,
+                  isProduct && styles.typeButtonActive,
+                ]}
+                onPress={() => setIsProduct(true)}
+              >
+                <Ionicons
+                  name="cube"
+                  size={24}
+                  color={isProduct ? COLORS.white : COLORS.accent}
+                />
+                <Text
+                  style={[
+                    styles.typeButtonText,
+                    isProduct && styles.typeButtonTextActive,
+                  ]}
+                >
+                  Товар
+                </Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                style={[
+                  styles.typeButton,
+                  !isProduct && styles.typeButtonActive,
+                ]}
+                onPress={() => setIsProduct(false)}
+              >
+                <Ionicons
+                  name="briefcase"
+                  size={24}
+                  color={!isProduct ? COLORS.white : COLORS.accent}
+                />
+                <Text
+                  style={[
+                    styles.typeButtonText,
+                    !isProduct && styles.typeButtonTextActive,
+                  ]}
+                >
+                  Послуга
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </View>
         </ScrollView>
       </KeyboardAvoidingView>
     </SafeAreaView>
