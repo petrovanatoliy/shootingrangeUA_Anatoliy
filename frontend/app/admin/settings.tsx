@@ -16,6 +16,7 @@ import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import axios from 'axios';
+import { setApiUrl, getApiUrlSync } from '../../config/apiConfig';
 
 const API_URL = process.env.EXPO_PUBLIC_BACKEND_URL || '';
 
