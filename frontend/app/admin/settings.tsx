@@ -391,7 +391,7 @@ export default function SettingsScreen() {
               
               <Text style={styles.developmentText}>Development by HVOYA integra 2026</Text>
               
-              <TouchableOpacity onPress={() => {}}>
+              <TouchableOpacity onPress={() => Linking.openURL('https://hvoya.com.ua')}>
                 <Text style={styles.websiteText}>hvoya.com.ua</Text>
               </TouchableOpacity>
             </View>
