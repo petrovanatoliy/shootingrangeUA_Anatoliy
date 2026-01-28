@@ -271,8 +271,12 @@ async def create_catalog(catalog: CatalogCreate):
     return catalog_obj
 
 @api_router.get("/catalogs", response_model=List[Catalog])
-async def get_catalogs(visible_only: bool = False):
-    query = {"is_visible": True} if visible_only else {}
+async def get_catalogs(visible_only: bool = False, is_product: Optional[bool] = None):
+    query = {}
+    if visible_only:
+        query["is_visible"] = True
+    if is_product is not None:
+        query["is_product"] = is_product
     catalogs = await db.catalogs.find(query).to_list(1000)
     return [Catalog(**c) for c in catalogs]
 
