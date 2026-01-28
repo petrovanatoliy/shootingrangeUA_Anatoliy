@@ -65,7 +65,14 @@ export default function SettingsScreen() {
   const loadSettings = async () => {
     try {
       const response = await axios.get(`${API_URL}/api/settings`);
-      setSettings(response.data);
+      const loadedSettings = response.data;
+      
+      // Якщо server_address порожній, заповнити поточною адресою бекенда
+      if (!loadedSettings.server_address) {
+        loadedSettings.server_address = API_URL || 'https://shooting-range-ua.preview.emergentagent.com';
+      }
+      
+      setSettings(loadedSettings);
     } catch (error) {
       console.error('Failed to load settings:', error);
     } finally {
